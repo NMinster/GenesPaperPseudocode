@@ -1,5 +1,5 @@
 # GenesPaperPseudocode
-Paper title: "A Machine Learning Approach to Parkinson’s Disease Blood Transcriptomics"
+**Paper title: "A Machine Learning Approach to Parkinson’s Disease Blood Transcriptomics"**
 
 This is a translation of the following pseudocode provided in the paper (https://www.mdpi.com/2073-4425/13/5/727).
 
@@ -19,7 +19,7 @@ This code performs a complex iterative feature selection process using RandomFor
 5.	Finally, for each feature, it calculates the number of times it was selected (count_selectedf) in all 20 rounds at C*.
 The main goal of the script is to identify the optimal subset of features and the threshold (C*) that maximize the performance (ROC AUC) of an XGBoost model. It does this through extensive feature importance estimation and outlier detection via RandomForest, followed by model training and performance evaluation via XGBoost. It also incorporates multiple iterations (20 rounds and 100 sub-rounds) and cross-validation (10-fold and 5-fold) to ensure robustness and generalizability of the results.
 
-Here are a few suggestions for improving the script:
+**Here are a few suggestions for improving the script:**
 
 1.  Feature Scaling: Gene expression data often contains large outliers and variance among its features. You might want to apply some form of feature scaling, such as StandardScaler or MinMaxScaler from the sklearn.preprocessing module, before training your models.
 
@@ -33,7 +33,7 @@ Here are a few suggestions for improving the script:
 
 6.  Balancing the Classes: If your binary classification task has imbalanced classes (one class has significantly more samples than the other), this can bias your model's predictions. Consider using a technique like SMOTE (Synthetic Minority Over-sampling Technique) or ADASYN (Adaptive Synthetic Sampling) to balance your classes.
 
-Here are a few suggestions for improving the methodology:
+**Here are a few suggestions for improving the methodology:**
 
 1.  This data is grouped by patient and visit. Many patients visit many times over several years. The implementation in the paper does not consider this and patient samples are mixed among training, validation, and test sets. This will likely lead to over fitting. You should consider this when splitting the data. 
 
