@@ -11,7 +11,7 @@ forr = 1 to 20 do
 Divide data into 10 stratified folds using random seed r
      for fold k = 1 to 10 do
          Set fold k as validation_set and the remaining 9 folds as training_set
-         for s = 1 to 100 do
+         for s = 1 to 100 do 
               Divide training_set into 5 stratified folds using random seed s
               Take 4 of the folds as the new training set
               Train a RF on this training set with 1000 trees
