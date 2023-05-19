@@ -8,14 +8,16 @@ from sklearn.metrics import roc_auc_score
 
 # Load the data
 Train_Data = pd.read_csv("C:/Users/NM/Documents/Genes/PPMI_Genes_2.csv", index_col ='ID')
-
 Data = Train_Data.T
+
+#Drop QC fails
 Data = Data[Data['QC'] != 0]
 
-# Here you have to specify the target variable in your dataset
+#define target
 y = Data["pd"]
 Data = Data.drop(columns=["pd"])  # Make sure to drop the target variable from the feature matrix
 
+#Translated code
 F = Data.shape[1]  # Number of features
 
 is_outlier = np.zeros((20, 100, F))
