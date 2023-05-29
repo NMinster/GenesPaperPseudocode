@@ -25,9 +25,9 @@ from scipy.stats import randint as sp_randint
 from scipy.stats import uniform as sp_uniform
 
 
-# Load the data
 Train_Data = pd.read_csv("C:/Users/NM/Documents/Genes/PPMI_Genes_2.csv", index_col ='ID')
 
+#Group by patient to prevent overfitting with longitudinal patient visits being shared between train, test, validate sets 
 Data=Train_Data.T
 Data['Number'] = Data.groupby('patient').cumcount().add(1)
 Data = Data[Data['QC'] != 0]
@@ -41,21 +41,19 @@ degs = degs.dropna()
 
 x, y = degs.drop(columns=["pd"]), degs["pd"]
 
-# Random Forest Parameter distribution
+#Set the RF, XGboost, and SVM parameters. 
 rf_param_dist = {
     'n_estimators': sp_randint(500, 1500),
     'max_depth': [None] + list(sp_randint(1, 10).rvs(size=10)),
     'min_samples_split': sp_randint(2, 10),
 }
 
-# XGBoost Parameter distribution
 xgb_param_dist = {
     'n_estimators': sp_randint(100, 1000),
     'max_depth': sp_randint(1, 10),
     'learning_rate': sp_uniform(0.01, 0.2),
 }
 
-# SVM Parameter distribution
 svm_param_dist = {
     'C': sp_uniform(0.1, 10),
     'kernel': ['linear', 'rbf'],
@@ -65,8 +63,10 @@ models_param_dist = [(RandomForestClassifier(), rf_param_dist),
                      (xgb.XGBClassifier(eval_metric='logloss'), xgb_param_dist),
                      (SVC(probability=True), svm_param_dist)]
 
+
 # Preserve patient groups when splitting
 group_kfold = GroupKFold(n_splits=10)
+
 
 # Use group_kfold.split() instead of train_test_split()
 for train_index, test_index in group_kfold.split(x, y, groups):
