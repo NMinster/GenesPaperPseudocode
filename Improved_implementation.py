@@ -1,11 +1,8 @@
-#This is a similar method used by the paper but with improvements
-#The original method is as follows:
-#Within a repeated stratified (to tackle the control-patient mismatch) 10-fold cross-validation framework (20 iterations)
-#we trained multiple RF models (100 repetitions, where each repetition used a different seed of the random generation process) to evaluate permutation feature importance measures. 
+#This is a similar method used by the paper with improvements
 
 #Improvements include modularization, a proper grid search, multiple models, proper class imbalance handeling, and use of groupkfold to control for multiple samples from the same patient.  
 
-#This method might still be improved and future work is cited in the ReadMe file. 
+#This method might still be improved and future work is refrenced in the ReadMe file. 
 
 import numpy as np
 import pandas as pd
